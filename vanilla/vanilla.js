@@ -15,6 +15,13 @@ console.debug('Verbose debug stuff');
 // Start coding here
 const myIntegers = [1, 2, 3];
 
+Employee.prototype = new Person(this.id, this.prename, this.surname);
+Employee.prototype.switch = function (newDepartment) {
+  console.debug(this.fullName() + ' switches to ' + newDepartment);
+
+  this.department = newDepartment;
+};
+
 function run() {
   // classic
   // forEach(myIntegers, showAlert);
@@ -46,7 +53,7 @@ function run() {
     console.debug(this);
   });*/
 
-  forEach('test', 'test');
+  // forEach('test', 'test');
 
   /*try {
     console.debug('trying...');
@@ -56,6 +63,11 @@ function run() {
   } finally {
     console.debug('...finally done :-)');
   }*/
+
+  var emp = new Employee(1, 'Max', 'Muster', 'Management');
+  console.debug('Employee', emp);
+  emp.switch('Dev');
+  console.debug('After switch', emp);
 }
 
 run();
@@ -70,27 +82,32 @@ function showAlert(item) {
   alert(item);
 }
 
-function Person(id, vorname, nachname) {
-  this.vorname = vorname;
-  this.nachname = nachname;
+function Person(id, prename, surename) {
+  this.prename = prename;
+  this.surename = surename;
 
-  this.vollerName = function () {
-    return id + ': ' + this.vorname + ' ' + this.nachname;
+  this.fullName = function () {
+    return id + ': ' + this.prename + ' ' + this.surename;
   };
 }
 
 class PersonClass {
   id;
-  vorname;
-  nachname;
+  prename;
+  surename;
 
-  constructor(id, vorname, nachname) {
+  constructor(id, prename, surename) {
     this.id = id;
-    this.vorname = vorname;
-    this.nachname = nachname;
+    this.prename = prename;
+    this.surename = surename;
   }
 
-  vollerName() {
-    return this.id + ': ' + this.vorname + ' ' + this.nachname;
+  fullName() {
+    return this.id + ': ' + this.prename + ' ' + this.surename;
   }
+}
+
+function Employee(id, prename, surename, department) {
+  Person.call(this, id, prename, surename);
+  this.department = department;
 }
