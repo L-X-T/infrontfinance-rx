@@ -76,7 +76,7 @@ function run() {
   console.debug(myIntegersExtended);
 }
 
-run();
+// run();
 
 function forEach(ary, action) {
   for (var i = 0; i < ary.length; i++) {
