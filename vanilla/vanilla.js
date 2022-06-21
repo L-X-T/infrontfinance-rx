@@ -17,7 +17,7 @@ const myIntegers = [1, 2, 3];
 
 function run() {
   // classic
-  forEach(myIntegers, showAlert);
+  // forEach(myIntegers, showAlert);
 
   // pass a function as parameter
   /*forEach(myIntegers, function (item) {
@@ -26,6 +26,12 @@ function run() {
 
   // pass a function as lambda
   // forEach(myIntegers, (item) => alert(item));
+
+  var rudi = new Person(47, 'Rudolf', 'Rentier');
+  // var rudi = new PersonClass(47, 'Rudolf', 'Rentier');
+  console.log(rudi.vorname);
+  console.log(rudi.nachname);
+  console.log(rudi.vollerName());
 }
 
 run();
@@ -38,4 +44,29 @@ function forEach(ary, action) {
 
 function showAlert(item) {
   alert(item);
+}
+
+function Person(id, vorname, nachname) {
+  this.vorname = vorname;
+  this.nachname = nachname;
+
+  this.vollerName = function () {
+    return id + ': ' + this.vorname + ' ' + this.nachname;
+  };
+}
+
+class PersonClass {
+  id;
+  vorname;
+  nachname;
+
+  constructor(id, vorname, nachname) {
+    this.id = id;
+    this.vorname = vorname;
+    this.nachname = nachname;
+  }
+
+  vollerName() {
+    return this.id + ': ' + this.vorname + ' ' + this.nachname;
+  }
 }
