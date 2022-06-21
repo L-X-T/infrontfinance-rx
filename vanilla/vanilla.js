@@ -65,9 +65,15 @@ function run() {
   }*/
 
   var emp = new Employee(1, 'Max', 'Muster', 'Management');
-  console.debug('Employee', emp);
+  /*console.debug('Employee', emp);
   emp.switch('Dev');
-  console.debug('After switch', emp);
+  console.debug('After switch', emp);*/
+
+  const emp2 = { ...emp, prename: 'Maria' };
+  console.debug('Employee 2', emp2);
+
+  const myIntegersExtended = [...myIntegers, 4];
+  console.debug(myIntegersExtended);
 }
 
 run();
