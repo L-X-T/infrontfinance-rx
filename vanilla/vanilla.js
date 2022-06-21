@@ -33,7 +33,7 @@ function run() {
   console.log(rudi.nachname);
   console.log(rudi.vollerName());*/
 
-  forEach(myIntegers, function (item) {
+  /*forEach(myIntegers, function (item) {
     console.debug(this); // Aufrufer (= forEach kann this festlegen)
   });
 
@@ -44,7 +44,18 @@ function run() {
 
   forEach(myIntegers, (item) => {
     console.debug(this);
-  });
+  });*/
+
+  forEach('test', 'test');
+
+  /*try {
+    console.debug('trying...');
+    forEach('test', 'test');
+  } catch (e) {
+    console.warn(e);
+  } finally {
+    console.debug('...finally done :-)');
+  }*/
 }
 
 run();
