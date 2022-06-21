@@ -52,3 +52,44 @@ console.log(manager.getById(2));
 console.log('PM getByName():');
 console.log(manager.getByName('Finance'));
 console.log('PM count(): ' + manager.count());
+
+class ExtendedPassengerManager extends PassengerManager {
+  add(passenger) {
+    const existingPassenger = this.getById(passenger.id);
+    if (existingPassenger) {
+      throw new Error('Passenger already exists');
+    } else {
+      this.passengers.push(passenger);
+    }
+  }
+
+  update(passenger) {
+    const passengerToUpdate = this.getById(passenger.id);
+    if (passengerToUpdate) {
+      passengerToUpdate.firstname = passenger.firstname;
+      passengerToUpdate.lastname = passenger.lastname;
+    }
+  }
+}
+
+const extendedManager = new ExtendedPassengerManager();
+console.log('EPM empty:');
+console.log(extendedManager);
+
+extendedManager.add(pass1);
+
+try {
+  extendedManager.add(pass1); // should throw exception
+} catch (e) {
+  console.warn(e);
+}
+
+console.log('EPM with added passenger:');
+console.log(extendedManager);
+console.log('EPM count(): ' + extendedManager.count());
+
+extendedManager.update({ ...pass2, id: pass1.id });
+
+console.log('EPM with added passenger:');
+console.log(extendedManager);
+console.log('EPM count(): ' + extendedManager.count());
