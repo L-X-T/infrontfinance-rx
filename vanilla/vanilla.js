@@ -29,9 +29,22 @@ function run() {
 
   var rudi = new Person(47, 'Rudolf', 'Rentier');
   // var rudi = new PersonClass(47, 'Rudolf', 'Rentier');
-  console.log(rudi.vorname);
+  /*console.log(rudi.vorname);
   console.log(rudi.nachname);
-  console.log(rudi.vollerName());
+  console.log(rudi.vollerName());*/
+
+  forEach(myIntegers, function (item) {
+    console.debug(this); // Aufrufer (= forEach kann this festlegen)
+  });
+
+  var that = this;
+  forEach(myIntegers, function (item) {
+    console.debug(that);
+  });
+
+  forEach(myIntegers, (item) => {
+    console.debug(this);
+  });
 }
 
 run();
