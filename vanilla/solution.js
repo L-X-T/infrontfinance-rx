@@ -29,6 +29,30 @@ class PassengerManager {
     return this.passengers.find((passenger) => passenger.lastname === lastname);
   }
 
+  loadByName(lastname) {
+    return new Promise((resolve, reject) => {
+      const apiUrl = 'http://www.angular.at/api/';
+      const xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          console.info('[xhr] readyState: ' + this.readyState);
+          console.info('[xhr] status: ' + this.status);
+          resolve(this.responseText);
+        } else if (this.status && this.status !== 200) {
+          console.warn('[xhr] readyState: ' + this.readyState);
+          console.warn('[xhr] status: ' + this.status);
+          reject(this);
+        } else {
+          console.debug('[xhr] readyState: ' + this.readyState);
+          console.debug('[xhr] status: ' + this.status);
+        }
+      };
+
+      xmlHttp.open('GET', apiUrl + 'passagier?name=' + lastname.toString(), true);
+      xmlHttp.send();
+    });
+  }
+
   count() {
     return this.passengers.length;
   }
@@ -93,3 +117,14 @@ extendedManager.update({ ...pass2, id: pass1.id });
 console.log('EPM with added passenger:');
 console.log(extendedManager);
 console.log('EPM count(): ' + extendedManager.count());
+
+extendedManager
+  .loadByName('Muster')
+  .then((passenger) => {
+    console.warn('[Resolve] Passenger:');
+    console.log(passenger);
+  })
+  .catch((response) => {
+    console.error('[Reject] Response:');
+    console.log(response);
+  });
